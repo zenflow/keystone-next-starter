@@ -1,4 +1,5 @@
 require('dotenv').config()
+
 const {promisify} = require('util')
 const express = require('express')
 const {keystone, apps} = require('./keystone/index')
@@ -12,6 +13,10 @@ async function main () {
   const {middlewares} = await keystone.prepare({apps, dev, distDir})
   await keystone.connect();
   const app = express();
+  app.use((req, res, next) => {
+    req.keystone = keystone
+    next()
+  });
   app.use(middlewares);
   await promisify(app.listen.bind(app))(port)
   console.log(`Listening at http://localhost:${port}`);

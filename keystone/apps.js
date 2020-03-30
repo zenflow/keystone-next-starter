@@ -1,6 +1,7 @@
 const { GraphQLApp } = require('@keystonejs/app-graphql');
 const { AdminUIApp } = require('@keystonejs/app-admin-ui');
 const { PasswordAuthStrategy  } = require('@keystonejs/auth-password');
+const { NextApp } = require('@keystonejs/app-next');
 const {keystone} = require('./keystone')
 
 const authStrategy = keystone.createAuthStrategy({
@@ -14,10 +15,8 @@ const authStrategy = keystone.createAuthStrategy({
 
 const apps = [
   new GraphQLApp(),
-  new AdminUIApp({
-    enableDefaultRoute: true,
-    authStrategy,
-  }),
+  new AdminUIApp({authStrategy}),
+  new NextApp({dir: 'next'})
 ];
 
 module.exports = {apps};
