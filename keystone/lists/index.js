@@ -1,6 +1,6 @@
 const users = require('./users')
 
-const createLists = keystone => {
+function createLists (keystone) {
   users(keystone)
 }
 
