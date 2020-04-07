@@ -1,8 +1,10 @@
 const { Text, Checkbox, Password } = require('@keystonejs/fields');
 const access = require('../access')
+const {getPlugins} = require('../plugins')
 
 module.exports = keystone => {
   keystone.createList('User', {
+    plugins: getPlugins(),
     access: {
       read: true,
       update: access.userIsAdminOrItem,
