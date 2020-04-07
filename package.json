@@ -28,10 +28,10 @@
   "dependencies": {
     "@gqless/react": "^0.0.1-alpha.28",
     "@keystonejs/adapter-mongoose": "^8.0.0",
-    "@keystonejs/app-admin-ui": "^5.9.3",
+    "@keystonejs/app-admin-ui": "https://gitpkg.now.sh/zenflow/keystone/packages/app-admin-ui?zenflow-1",
     "@keystonejs/app-graphql": "^5.1.4",
     "@keystonejs/app-next": "^5.1.1",
-    "@keystonejs/auth-passport": "^5.1.3",
+    "@keystonejs/auth-passport": "https://gitpkg.now.sh/zenflow/keystone/packages/auth-passport?zenflow-1",
     "@keystonejs/auth-password": "^5.1.3",
     "@keystonejs/fields": "^9.0.0",
     "@keystonejs/keystone": "^8.0.0",
