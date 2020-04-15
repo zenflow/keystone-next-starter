@@ -23,6 +23,7 @@
     "generate": "gqless generate",
     "dev": "cross-env NODE_ENV=development nodemon server.js",
     "build": "cross-env NODE_ENV=production keystone build --entry=keystone/index.js",
+    "now-build": "npm run build",
     "start": "cross-env NODE_ENV=production node server.js"
   },
   "dependencies": {

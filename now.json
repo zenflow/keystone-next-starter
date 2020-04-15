@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "name": "keystone-next-starter",
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@now/node",
+      "config": {
+        "includeFiles": [
+          "dist/**",
+          "next/.next/**"
+        ]
+      }
+    }
+  ],
+  "routes": [
+    { "src": "/.*", "dest": "server.js" }
+  ]
+}
