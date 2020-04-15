@@ -7,7 +7,6 @@ function createKeystone () {
   return new Keystone({
     name: 'keystone-next-starter',
     appVersion: pkg.version,
-    secureCookies: process.env.DISABLE_SECURE_COOKIES !== 'true',
     cookieSecret: process.env.COOKIE_SECRET || 'qwerty',
     // sessionStore: // TODO use persistent store
     adapter: new MongooseAdapter(),
