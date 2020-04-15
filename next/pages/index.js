@@ -1,13 +1,10 @@
 import Head from 'next/head'
+import {graphql} from '@gqless/react'
 import pkg from '../../package'
+import {withGqless, useGqless} from '../lib/gqless'
+import Suspense from '../lib/SsrCompatibleSuspense'
 
-export async function getServerSideProps ({req: {keystone, user = null}}) {
-  // This call is not subject to access control rules
-  const {data: {allUsers}} = await keystone.executeQuery('{allUsers {username isAdmin bio}}')
-  return {props: {user, allUsers}}
-}
-
-const Home = ({allUsers, user}) => (
+const Home = withGqless()(({user}) => (
   <div className="container">
     <Head>
       <title>keystone-next-starter</title>
@@ -33,11 +30,10 @@ const Home = ({allUsers, user}) => (
         </a>
       </div>
 
-      <h3>Your user</h3>
-      <pre>{JSON.stringify(user, null, 2)}</pre>
-
       <h3>All users</h3>
-      <pre>{JSON.stringify(allUsers, null, 2)}</pre>
+      <Suspense fallback={<div>Loading...</div>}>
+        <AllUsersTable/>
+      </Suspense>
     </main>
 
     <style jsx>{`
@@ -151,6 +147,32 @@ const Home = ({allUsers, user}) => (
       }
     `}</style>
   </div>
-)
+))
+
+const AllUsersTable = graphql(() => {
+  const {query: {allUsers, authenticatedUser}} = useGqless()
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Email</th>
+          <th>Admin?</th>
+          <th>Bio</th>
+        </tr>
+      </thead>
+      <tbody>
+        {allUsers.map(user => (
+          <tr key={user.id}>
+            <td>{authenticatedUser?.id === user.id ? ' (You)' : ''}</td>
+            <td>{user.email}</td>
+            <td>{user.isAdmin ? '✔️' : '❌'}</td>
+            <td>{user.bio}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
+})
 
 export default Home

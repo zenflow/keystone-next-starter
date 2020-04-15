@@ -5,24 +5,24 @@ module.exports = async keystone => {
   const { data: { _allUsersMeta: { count: existingUserCount } } } = await keystone.executeQuery(`{ _allUsersMeta { count } }`);
 
   if (existingUserCount === 0) {
-    const username = 'admin';
+    const email = 'admin@keystonejs.com';
     const password = 'password'
 
     await keystone.executeQuery(
-      `mutation ($username: String, $password: String) {
-        createUser(data: {username: $username, password: $password, isAdmin: true}) {
+      `mutation ($email: String, $password: String) {
+        createUser(data: {email: $email, password: $password, isAdmin: true}) {
           id
         }
       }`,
       {
-        variables: { username, password }
+        variables: { email, password }
       }
     );
 
     console.log(`
 
 User created:
-  username: ${username}
+  email: ${email}
   password: ${password}
 Please change password after initial login.
 `);

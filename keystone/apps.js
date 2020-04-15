@@ -8,7 +8,7 @@ function createApps (keystone) {
     type: PasswordAuthStrategy,
     list: 'User',
     config: {
-      identityField: 'username',
+      identityField: 'email',
       secretField: 'password',
     },
   });

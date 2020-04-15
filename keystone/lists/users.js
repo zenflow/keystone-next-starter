@@ -6,14 +6,14 @@ module.exports = keystone => {
   keystone.createList('User', {
     plugins: getPlugins(),
     access: {
+      create: access.userIsAdmin,
       read: true,
       update: access.userIsAdminOrItem,
-      create: access.userIsAdmin,
       delete: access.userIsAdmin,
     },
-    labelField: 'username',
+    labelField: 'email',
     fields: {
-      username: {
+      email: {
         type: Text,
         isUnique: true,
         isRequired: true,
@@ -33,11 +33,12 @@ module.exports = keystone => {
       },
       bio: {
         type: Text,
+        defaultValue: '',
       },
     },
     adminConfig: {
-      defaultColumns: 'username,isAdmin,bio',
-      defaultSort: 'username',
+      defaultColumns: 'email,isAdmin,bio,createdAt,createdBy',
+      defaultSort: 'email',
     },
   });
 }
