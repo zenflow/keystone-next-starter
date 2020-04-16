@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "keystone-next-starter",
   "builds": [
     {
       "src": "server.js",
