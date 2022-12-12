@@ -39,7 +39,7 @@
     "@zen_flow/react-ssr-prepass": "1.1.2-next-with-gqless-example-2",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "gqless": "^0.0.1-alpha.29",
     "isomorphic-unfetch": "^3.0.0"
   },
